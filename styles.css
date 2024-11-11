@@ -1,0 +1,198 @@
+/* Basic CSS styling for the Sudoku grid and controls */
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  background-color:lightblue;
+}
+/* Basic styling for tabs */
+    .tab-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    .tab {
+      padding: 10px 20px;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;;
+    }
+    .tab.active {
+      background-color: #ddd;
+      font-weight: bold;
+    }
+    
+    /* Center and style the tab content */
+    .tab-content {
+      display: none;
+      border: 2px solid #4CAF50; /* Adjust color as needed */
+      padding: 20px;
+      margin: 0 auto;
+      max-width: 80%;
+      background-color: #fff;
+      text-align: left;
+      border-radius: 8px;
+      width: fit-content; /* Ensures container fits content width */
+    }
+    .tab-content.active {
+      display: block;
+    }
+
+#controls {
+  margin: 10px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+#controls button, #controls select {
+  font-size: 15px;
+  padding: 2px 2px 2px 2px;
+  margin: 2px;
+}
+
+
+#sudoku-grid {
+  display: inline-block;
+  margin-top: 5px;
+  
+}
+
+.sudoku-row {
+  display: flex;
+}
+
+.sudoku-cell {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 25px;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Thicker borders for 3x3 grid */
+.sudoku-cell:nth-child(3), .sudoku-cell:nth-child(6) {
+  border-right: 2px solid #000;
+}
+.sudoku-row:nth-child(3) .sudoku-cell,
+.sudoku-row:nth-child(6) .sudoku-cell {
+  border-bottom: 3px solid #000;
+}
+
+/* New styles for pre-filled cells */
+.prefilled-cell {
+  background-color: #e0e0e0; /* Light grey background */
+}
+
+/* Style for user-entered numbers */
+.user-input {
+  color: red; /* Red text for user input */
+}
+.number-bar-input {
+  color: red;
+}
+
+/* Style for prefilled cells */
+.prefilled-cell {
+  color: black;
+}
+
+/* Style for Solving entered numbers */
+.user-input,
+.number-bar-input {
+  color: blue;
+}
+
+/* Style for correct user entries */
+.sudoku-cell.correct:not(.prefilled-cell) {
+  color: green;
+}
+
+/* Style for incorrect user entries */
+.sudoku-cell.incorrect:not(.prefilled-cell) {
+  color: red;
+}
+
+/* Selected cell styling */
+.selected {
+  border: 2px solid #4CAF50; /* Highlight selected cell */
+}
+
+/* Style for hint cells */
+.hint-cell {
+  color: orange; /* Choose a color that differentiates hints */
+}
+
+#number-grid {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.number-btn {
+  width: 40px;
+  height: 40px;
+  margin: 2px;
+  font-size: 18px;
+  cursor: pointer;
+}
+#toolbar {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+#toolbar button {
+  margin: 0 5px;
+  padding: 5px 5px 5px 5px;
+  cursor: pointer;
+}
+
+/* Style for user-entered numbers */
+.user-input {
+  color: blue;
+}
+
+/* Style for correct numbers */
+.correct:not(.prefilled-cell) {
+  color: green;
+}
+
+/* Style for incorrect numbers */
+.incorrect {
+  color: red;
+}
+
+/* Selected cell styling */
+.selected {
+  border: 2px solid #4CAF50; /* Highlight selected cell */
+}
+
+
+/* Responsive Design for Mobile Devices */
+@media (max-width: 600px) {
+  .sudoku-cell {
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+  }  
+    
+  #controls button, #controls select {
+    font-size: 15px;
+    padding: 2px;
+  }
+  .number-btn {
+  width: 25px;
+  height: 25px;
+  margin: 1px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+ }
