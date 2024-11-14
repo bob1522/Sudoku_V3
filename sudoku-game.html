@@ -19,7 +19,7 @@
 </head>
 <body>
   <h1>Sudoku Basic</h1>
-  <h4>Version 3.0.20</h4>
+  <h4>Version 3.1.0</h4>
 
   <!-- Tabs for Game and Instructions -->
   <div class="tab-container">
@@ -42,6 +42,7 @@
   <!-- Tab Content -->
   <div id="game" class="tab-content active">
     <!-- Difficulty Selection and New Game Button -->
+
     <div id="controls">
       <label for="difficulty-select">Difficulty:</label>
       <select id="difficulty-select">
@@ -50,14 +51,19 @@
         <option value="hard">Hard</option>
       </select>
       <button id="generate-btn">New Game</button>
-      
     </div>
-    <div id="controls">
-      <button id="hint-btn">Hint</button>
-      <span id="hints-used">Hints used: 0</span>
-      
+    <div>
+
+    <div id="controls2">
+      <div id="left-section">
+        <button id="hint-btn">Hint</button>
+        <span id="hints-used">Hints used: 0</span>
+      </div>
+      <div id="timer-container">
+        <button id="timer-toggle-btn">Stop Time</button>
+        <span id="elapsed-time">00:00:00</span>
+      </div>
     </div>
-      
 
     <!-- Sudoku Grid -->
     <div id="sudoku-grid">
@@ -66,6 +72,7 @@
 
     <!-- Number Grid -->
     <div id="number-grid">
+      <button class="number-btn" data-number="">-</button>
       <button class="number-btn" data-number="1">1</button>
       <button class="number-btn" data-number="2">2</button>
       <button class="number-btn" data-number="3">3</button>
@@ -91,9 +98,7 @@
 
   <!-- Include the Sudoku library -->
   <script src="sudoku.js"></script>
-  <!-- Include the main script 
-  <script src="sudoku-game.js"></script>-->
-  
+    
     
 </body>
 </html>

@@ -42,16 +42,44 @@ body {
 #controls {
   margin: 10px auto;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
-  
+ 
 }
 
 #controls button, #controls select {
   font-size: 15px;
   padding: 2px 2px 2px 2px;
   margin: 2px;
+}
+#controls2 {
+  margin: 10px auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}  
+#left-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#timer-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#elapsed-time {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#timer-toggle-btn {
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 
@@ -132,25 +160,25 @@ body {
 #number-grid {
   display: flex;
   justify-content: center;
-  margin-top: 5px;
+  margin-top: 15px;
 }
 
 .number-btn {
   width: 40px;
   height: 40px;
   margin: 2px;
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
 }
 #toolbar {
   display: flex;
   justify-content: center;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 #toolbar button {
   margin: 0 5px;
-  padding: 5px 5px 5px 5px;
+  padding: 10px 10px 10px 10px;
   cursor: pointer;
 }
 
@@ -173,7 +201,6 @@ body {
 .selected {
   border: 2px solid #4CAF50; /* Highlight selected cell */
 }
-
 
 /* Responsive Design for Mobile Devices */
 @media (max-width: 600px) {

@@ -5,6 +5,50 @@ let selectedCell = null;
 let undoStack = [];
 let solutionGrid = []; // Store the solution grid
 let hintsUsed = 0; // Keep track of the number of hints used
+let timerInterval;
+let elapsedTime = 0; // Time in seconds
+let isTimerRunning = false;
+
+function formatTime(seconds) {
+  const hrs = Math.floor(seconds / 3600);
+  const mins = Math.floor((seconds % 3600) / 60);
+  const secs = seconds % 60;
+  return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
+
+function startTimer() {
+  if (!isTimerRunning) {
+    isTimerRunning = true;
+    timerInterval = setInterval(() => {
+      elapsedTime++;
+      document.getElementById('elapsed-time').textContent = formatTime(elapsedTime);
+    }, 1000);
+  }
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+  isTimerRunning = false;
+}
+
+function toggleTimer() {
+  if (isTimerRunning) {
+    stopTimer();
+    document.getElementById('timer-toggle-btn').textContent = 'Start Time';
+  } else {
+    startTimer();
+    document.getElementById('timer-toggle-btn').textContent = 'Stop Time';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('timer-toggle-btn').addEventListener('click', toggleTimer);
+  //startTimer(); // Start the timer when the game starts
+});
+
+
+
+
 
 // Wait for the DOM to load
 document.addEventListener('DOMContentLoaded', function() {
@@ -155,6 +199,8 @@ function generateNewGame(difficulty) {
   // Get the solution and store it
   solutionGrid = structuredClone(bothArrays[0]);
   console.log("solutionGrid", solutionGrid);
+  elapsedTime = 0;
+  startTimer(); // Start the timer when the game starts
 }
 
 // Get the full board
@@ -379,8 +425,16 @@ function convertPuzzleStringToArray(puzzleString) {
 }
 
 // Function to save the puzzle state to local storage
+//function savePuzzle() {
+  //const puzzleState = getCurrentPuzzleState();
+  //localStorage.setItem('savedPuzzle', JSON.stringify(puzzleState));
+  //alert('Your game has been saved!');
+//}
+
+// Update `savePuzzle` to include elapsed time
 function savePuzzle() {
   const puzzleState = getCurrentPuzzleState();
+  puzzleState.elapsedTime = elapsedTime; // Save elapsed time
   localStorage.setItem('savedPuzzle', JSON.stringify(puzzleState));
   alert('Your game has been saved!');
 }
@@ -391,6 +445,21 @@ function loadPuzzle() {
   if (savedPuzzle) {
     const puzzleState = JSON.parse(savedPuzzle);
     loadPuzzleState(puzzleState);
+    alert('Your saved game has been loaded!');
+  } else {
+    alert('No saved game found.');
+  }
+}
+
+// Update `loadPuzzle` to resume the timer
+function loadPuzzle() {
+  const savedPuzzle = localStorage.getItem('savedPuzzle');
+  if (savedPuzzle) {
+    const puzzleState = JSON.parse(savedPuzzle);
+    loadPuzzleState(puzzleState);
+    elapsedTime = puzzleState.elapsedTime || 0; // Load saved elapsed time
+    document.getElementById('elapsed-time').textContent = formatTime(elapsedTime);
+    startTimer(); // Resume the timer
     alert('Your saved game has been loaded!');
   } else {
     alert('No saved game found.');
@@ -556,3 +625,5 @@ function setBoard(board) {
     }
     //console.log("Inputs ", inputs);
 }
+
+		
