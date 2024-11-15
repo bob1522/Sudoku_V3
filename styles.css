@@ -106,7 +106,7 @@ body {
 
 /* Thicker borders for 3x3 grid */
 .sudoku-cell:nth-child(3), .sudoku-cell:nth-child(6) {
-  border-right: 2px solid #000;
+  border-right: 3px solid #000;
 }
 .sudoku-row:nth-child(3) .sudoku-cell,
 .sudoku-row:nth-child(6) .sudoku-cell {
