@@ -49,9 +49,14 @@ body {
 }
 
 #controls button, #controls select {
+  padding: 10px 20px; /* Increase padding for a bigger touch area */
+  font-size: 18px; /* Larger font for better readability */
+  min-width: 80px; /* Minimum width for consistency */
+  /*
   font-size: 15px;
   padding: 2px 2px 2px 2px;
   margin: 2px;
+  */
 }
 #controls2 {
   margin: 10px auto;
@@ -211,8 +216,13 @@ body {
   }  
     
   #controls button, #controls select {
+    padding: 15px 25px; /* More padding for touch devices */
+    font-size: 20px; /* Larger font size for small screens */
+    min-width: 100px; /* Wider for touch ease */
+    /*
     font-size: 15px;
     padding: 2px;
+    */
   }
   .number-btn {
   width: 25px;
