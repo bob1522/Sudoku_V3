@@ -46,10 +46,6 @@ document.addEventListener('DOMContentLoaded', () => {
   //startTimer(); // Start the timer when the game starts
 });
 
-
-
-
-
 // Wait for the DOM to load
 document.addEventListener('DOMContentLoaded', function() {
   // Generate the Sudoku grid (empty)
@@ -105,8 +101,9 @@ function generateGrid() {
     for (let col = 0; col < 9; col++) {
       const cellInput = document.createElement('input');
       cellInput.type = 'text';
-      cellInput.maxLength = '1';
+      cellInput.maxLength = '3';
       cellInput.classList.add('sudoku-cell');
+      cellInput.contentEditable="true"
       cellInput.id = 'cell-' + (row * 9 + col);
 
       // Prevent virtual keyboard from appearing
@@ -125,27 +122,50 @@ function generateGrid() {
 }
 
 function addCellEventListeners() {
-  // Event listeners for number buttons
   const numberButtons = document.querySelectorAll('.number-btn');
   numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
       if (selectedCell && !selectedCell.classList.contains('prefilled-cell')) {
         const number = button.getAttribute('data-number');
-        addToUndoStack(selectedCell, number, true); // Indicate number bar input
-        selectedCell.value = number;
-        // Add the 'number-bar-input' class
-        selectedCell.classList.add('number-bar-input');
-        // Remove other input-related classes if necessary
-        selectedCell.classList.remove('user-input', 'hint-cell', 'correct', 'incorrect');
 
-        // After entering a number, check if the puzzle is complete
-        if (isPuzzleComplete()) {
-          validateSolution();
+        // Check if the 'Clear' button was clicked (assuming it has a specific data attribute or class)
+        if (number === '') {
+          addToUndoStack(selectedCell, selectedCell.value); // Save current state before clearing
+          selectedCell.value = ''; // Clear the cell's content
+          selectedCell.classList.remove('multiple'); // Remove multiple class if present
+          return; // Exit the function to prevent further checks
+        }
+
+        // Allow adding a number only if it is not already in the cell
+        if (selectedCell.value.includes(number)) {
+          alert('Number already in cell');
+        } else {
+          addToUndoStack(selectedCell, selectedCell.value);
+          selectedCell.value += number; // Append the number
+
+          // Apply the 'multiple' class if there are multiple numbers
+          if (selectedCell.value.length > 1) {
+            selectedCell.classList.add('multiple');
+          } else {
+            selectedCell.classList.remove('multiple');
+          }
         }
       }
     });
   });
+
+  // Listen for manual cell edits (keyboard input)
+  sudokuCells.forEach(cell => {
+    cell.addEventListener('input', () => {
+      if (cell.value.length > 1) {
+        cell.classList.add('multiple');
+      } else {
+        cell.classList.remove('multiple');
+      }
+    });
+  });
 }
+
 
 // Function to handle cell selection
 function selectCell(cell) {
@@ -424,13 +444,6 @@ function convertPuzzleStringToArray(puzzleString) {
     }
 }
 
-// Function to save the puzzle state to local storage
-//function savePuzzle() {
-  //const puzzleState = getCurrentPuzzleState();
-  //localStorage.setItem('savedPuzzle', JSON.stringify(puzzleState));
-  //alert('Your game has been saved!');
-//}
-
 // Update `savePuzzle` to include elapsed time
 function savePuzzle() {
   const puzzleState = getCurrentPuzzleState();
@@ -465,7 +478,6 @@ function loadPuzzle() {
     alert('No saved game found.');
   }
 }
-
 
 function loadPuzzleState(puzzleState) {
   hintsUsed = puzzleState.hintsUsed || 0;
@@ -580,9 +592,6 @@ function provideHint() {
     alert('Please select an empty cell to get a hint.');
   }
 }
-
-//----------------------------------------------------------------------------------------------------
-
 
 // Function to find all solutions up to maxSolutions for a given board
 function findAllSolutions(board, solutions, maxSolutions) {

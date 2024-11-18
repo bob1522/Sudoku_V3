@@ -54,11 +54,7 @@ body {
   font-size: 18px; /* Larger font for better readability */
   min-width: 80px; /* Minimum width for consistency */
   margin: 2px;
-  /*
-  font-size: 15px;
-  padding: 2px 2px 2px 2px;
-  margin: 2px;
-  */
+  
 }
 #controls2 {
   /* Ver 3.1.3 */
@@ -78,6 +74,10 @@ body {
   gap: 10px;
 }
 
+#hint-btn {
+  font-size: 20px;
+}
+
 #timer-container {
   display: flex;
   align-items: center;
@@ -90,11 +90,10 @@ body {
 }
 
 #timer-toggle-btn {
-  font-size: 20px
+  font-size: 20px;
   padding: 5px 10px;
   cursor: pointer;
 }
-
 
 #sudoku-grid {
   display: inline-block;
@@ -105,18 +104,7 @@ body {
 .sudoku-row {
   display: flex;
 }
-/*
-.sudoku-cell {
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  font-size: 25px;
-  border: 1px solid #000;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-*/
+
 .sudoku-cell {
   width: 50px;
   height: 50px;
@@ -128,8 +116,8 @@ body {
   cursor: text;
 }
 
-.cell.multiple {
-  font-size: 14px;
+.sudoku-cell.multiple {
+  font-size: 20px;
   color: red;
   line-height: normal;
 }
@@ -244,10 +232,7 @@ body {
     padding: 15px 25px; /* More padding for touch devices */
     font-size: 20px; /* Larger font size for small screens */
     min-width: 100px; /* Wider for touch ease */
-    /*
-    font-size: 15px;
-    padding: 2px;
-    */
+    
   }
   .number-btn {
   width: 25px;
