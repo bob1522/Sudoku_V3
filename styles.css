@@ -105,7 +105,7 @@ body {
 .sudoku-row {
   display: flex;
 }
-
+/*
 .sudoku-cell {
   width: 50px;
   height: 50px;
@@ -115,6 +115,23 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+*/
+.sudoku-cell {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #000;
+  font-size: 24px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px; /* Centers text vertically */
+  cursor: text;
+}
+
+.cell.multiple {
+  font-size: 14px;
+  color: red;
+  line-height: normal;
 }
 
 /* Thicker borders for 3x3 grid */
