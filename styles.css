@@ -78,6 +78,10 @@ body {
   gap: 10px;
 }
 
+#hint-btn {
+  font-size: 20px;
+}
+
 #timer-container {
   display: flex;
   align-items: center;
@@ -95,7 +99,6 @@ body {
   cursor: pointer;
 }
 
-
 #sudoku-grid {
   display: inline-block;
   margin-top: 5px;
@@ -105,18 +108,7 @@ body {
 .sudoku-row {
   display: flex;
 }
-/*
-.sudoku-cell {
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  font-size: 25px;
-  border: 1px solid #000;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-*/
+
 .sudoku-cell {
   width: 50px;
   height: 50px;
@@ -128,7 +120,7 @@ body {
   cursor: text;
 }
 
-.cell.multiple {
+.sudoku-cell.multiple {
   font-size: 20px;
   color: red;
   line-height: normal;
