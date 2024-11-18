@@ -54,11 +54,7 @@ body {
   font-size: 18px; /* Larger font for better readability */
   min-width: 80px; /* Minimum width for consistency */
   margin: 2px;
-  /*
-  font-size: 15px;
-  padding: 2px 2px 2px 2px;
-  margin: 2px;
-  */
+  
 }
 #controls2 {
   /* Ver 3.1.3 */
@@ -236,10 +232,7 @@ body {
     padding: 15px 25px; /* More padding for touch devices */
     font-size: 20px; /* Larger font size for small screens */
     min-width: 100px; /* Wider for touch ease */
-    /*
-    font-size: 15px;
-    padding: 2px;
-    */
+    
   }
   .number-btn {
   width: 25px;
