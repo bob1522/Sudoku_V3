@@ -41,6 +41,7 @@ body {
     }
     .tab-content.active {
       display: block;
+      font-size: 12px;
     }
 
 #controls {
