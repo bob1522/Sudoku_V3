@@ -12,11 +12,15 @@ body {
       justify-content: center;
       margin-bottom: 20px;
       cursor: pointer;
+      font-size: 50px;
+      width: 100%;
+      
     }
     .tab {
       padding: 10px 20px;
       border: 1px solid #ccc;
       background-color: #f1f1f1;;
+      
     }
     .tab.active {
       background-color: #ddd;
