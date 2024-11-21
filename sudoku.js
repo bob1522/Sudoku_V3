@@ -41,12 +41,12 @@ function toggleTimer() {
   }
 }
 
+// Wait for the DOM to load
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('timer-toggle-btn').addEventListener('click', toggleTimer);
   //startTimer(); // Start the timer when the game starts
 });
 
-// Wait for the DOM to load
 document.addEventListener('DOMContentLoaded', function() {
   // Generate the Sudoku grid (empty)
   generateGrid();
@@ -110,9 +110,9 @@ function generateGrid() {
       cellInput.readOnly = true;
       cellInput.inputMode = 'none';
 
-      // Add event listener for cell selection
+      // Add event listeners for cell
       cellInput.addEventListener('click', () => selectCell(cellInput));
-
+      
       rowDiv.appendChild(cellInput);
     }
     gridContainer.appendChild(rowDiv);
@@ -149,11 +149,17 @@ function addCellEventListeners() {
           } else {
             selectedCell.classList.remove('multiple');
           }
+
+          // After entering a number, check if the puzzle is complete
+          if (isPuzzleComplete()) {
+             validateSolution();
+          }  
+        }
         }
       }
-    });
+    );
   });
-
+  
   // Listen for manual cell edits (keyboard input)
   sudokuCells.forEach(cell => {
     cell.addEventListener('input', () => {
@@ -166,6 +172,7 @@ function addCellEventListeners() {
   });
 }
 
+  
 
 // Function to handle cell selection
 function selectCell(cell) {
@@ -385,11 +392,19 @@ function solveSudokuHelper(board) {
 
 
 // Function to clear the board
+// function clearBoard() {
+//   sudokuCells.forEach((cell) => {
+//     cell.value = '';
+//     cell.classList.remove('prefilled-cell', 'user-input', 'number-bar-input', 'correct', 'incorrect', 'hint-cell');
+//     // Ensure cells remain read-only
+//     cell.readOnly = true;
+//   });
+// }
 function clearBoard() {
+  if (!sudokuCells) sudokuCells = document.querySelectorAll('.sudoku-cell'); // Ensure it's initialized
   sudokuCells.forEach((cell) => {
     cell.value = '';
     cell.classList.remove('prefilled-cell', 'user-input', 'number-bar-input', 'correct', 'incorrect', 'hint-cell');
-    // Ensure cells remain read-only
     cell.readOnly = true;
   });
 }
@@ -398,7 +413,8 @@ function clearBoard() {
 function populateBoard(puzzleArray, isSolving = false) {
   let index = 0;
   sudokuCells.forEach((cell) => {
-    const value = puzzleArray[index];
+    //const value = puzzleArray[index];
+    const value = Number(puzzleArray[index]); // Ensure it's a number
     if (value !== 0) {
       cell.value = value;
       if (!isSolving) {
@@ -453,16 +469,16 @@ function savePuzzle() {
 }
 
 // Function to load the puzzle state from local storage
-function loadPuzzle() {
-  const savedPuzzle = localStorage.getItem('savedPuzzle');
-  if (savedPuzzle) {
-    const puzzleState = JSON.parse(savedPuzzle);
-    loadPuzzleState(puzzleState);
-    alert('Your saved game has been loaded!');
-  } else {
-    alert('No saved game found.');
-  }
-}
+// function loadPuzzle() {
+//   const savedPuzzle = localStorage.getItem('savedPuzzle');
+//   if (savedPuzzle) {
+//     const puzzleState = JSON.parse(savedPuzzle);
+//     loadPuzzleState(puzzleState);
+//     alert('Your saved game has been loaded!');
+//   } else {
+//     alert('No saved game found.');
+//   }
+//}
 
 // Update `loadPuzzle` to resume the timer
 function loadPuzzle() {
@@ -534,6 +550,41 @@ function isPuzzleComplete() {
   }
   return true;
 }
+
+// Function to check if the puzzle is complete
+// function isPuzzleComplete() {
+//   sudokuCells.forEach((cell, index) => {
+//     if (cell.value === '') {
+//       console.log('Cell at index', index, 'is empty');
+//       complete = false;
+//     } else {
+//       const userValue = parseInt(cell.value);
+//       const correctValue = solutionGrid[index];
+//       if (userValue !== correctValue) {
+//         console.log('Cell at index', index, 'is incorrect. User value:', userValue, 'Correct value:', correctValue);
+//         complete = false;
+//       }
+//     }
+//   });
+// }
+// function isPuzzleComplete() {
+//   let complete = true; // Initialize `complete`
+//   sudokuCells.forEach((cell, index) => {
+//     if (cell.value === '') {
+//       console.log('Cell at index', index, 'is empty');
+//       complete = false;
+//     } else {
+//       const userValue = parseInt(cell.value);
+//       const correctValue = solutionGrid[index];
+//       if (userValue !== correctValue) {
+//         console.log('Cell at index', index, 'is incorrect. User value:', userValue, 'Correct value:', correctValue);
+//         complete = false;
+//       }
+//     }
+//   });
+//   return complete; // Ensure to return the result
+// }
+
 // Function to validate the user's solution
 function validateSolution() {
   let allCorrect = true;
@@ -556,7 +607,7 @@ function validateSolution() {
       allCorrect = false;
     }
   });
-
+  console.log("allCorrect :", allCorrect) 
   if (allCorrect) {
     alert('Congratulations! You have completed the puzzle correctly!\nHints used: ' + hintsUsed);
   } else {
@@ -626,10 +677,16 @@ function setBoard(board) {
         for (let j = 0; j < 9; j++) {
             const index = i * 9 + j;
             if (board[i][j] !== 0) {
-                inputs[index].value = board[i][j];
-                //console.log("Board cell value :", board[i][j]);
-                inputs[index].style.color = 'blue'; // Color for solved numbers
+                if (!inputs[index].classList.contains('prefilled-cell')){
+                  inputs[index].value = board[i][j];
+                  inputs[index].classList.add('correct');
+                  //inputs[index].style.color = 'green'; // Color for solved numbers
+                } 
             }
+                
+                //console.log("Board cell value :", board[i][j]);
+                //inputs[index].style.color = 'blue'; // Color for solved numbers
+            
         }
     }
     //console.log("Inputs ", inputs);
