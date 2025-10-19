@@ -391,15 +391,6 @@ function solveSudokuHelper(board) {
   }
 
 
-// Function to clear the board
-// function clearBoard() {
-//   sudokuCells.forEach((cell) => {
-//     cell.value = '';
-//     cell.classList.remove('prefilled-cell', 'user-input', 'number-bar-input', 'correct', 'incorrect', 'hint-cell');
-//     // Ensure cells remain read-only
-//     cell.readOnly = true;
-//   });
-// }
 function clearBoard() {
   if (!sudokuCells) sudokuCells = document.querySelectorAll('.sudoku-cell'); // Ensure it's initialized
   sudokuCells.forEach((cell) => {
@@ -467,18 +458,6 @@ function savePuzzle() {
   localStorage.setItem('savedPuzzle', JSON.stringify(puzzleState));
   alert('Your game has been saved!');
 }
-
-// Function to load the puzzle state from local storage
-// function loadPuzzle() {
-//   const savedPuzzle = localStorage.getItem('savedPuzzle');
-//   if (savedPuzzle) {
-//     const puzzleState = JSON.parse(savedPuzzle);
-//     loadPuzzleState(puzzleState);
-//     alert('Your saved game has been loaded!');
-//   } else {
-//     alert('No saved game found.');
-//   }
-//}
 
 // Update `loadPuzzle` to resume the timer
 function loadPuzzle() {
@@ -548,44 +527,10 @@ function isPuzzleComplete() {
       return false;
     }
   }
-  stopTimer(); // Stops timer when the game is complete	
+  
   return true;
-	
-}
 
-// Function to check if the puzzle is complete
-// function isPuzzleComplete() {
-//   sudokuCells.forEach((cell, index) => {
-//     if (cell.value === '') {
-//       console.log('Cell at index', index, 'is empty');
-//       complete = false;
-//     } else {
-//       const userValue = parseInt(cell.value);
-//       const correctValue = solutionGrid[index];
-//       if (userValue !== correctValue) {
-//         console.log('Cell at index', index, 'is incorrect. User value:', userValue, 'Correct value:', correctValue);
-//         complete = false;
-//       }
-//     }
-//   });
-// }
-// function isPuzzleComplete() {
-//   let complete = true; // Initialize `complete`
-//   sudokuCells.forEach((cell, index) => {
-//     if (cell.value === '') {
-//       console.log('Cell at index', index, 'is empty');
-//       complete = false;
-//     } else {
-//       const userValue = parseInt(cell.value);
-//       const correctValue = solutionGrid[index];
-//       if (userValue !== correctValue) {
-//         console.log('Cell at index', index, 'is incorrect. User value:', userValue, 'Correct value:', correctValue);
-//         complete = false;
-//       }
-//     }
-//   });
-//   return complete; // Ensure to return the result
-// }
+}
 
 // Function to validate the user's solution
 function validateSolution() {
@@ -612,6 +557,7 @@ function validateSolution() {
   console.log("allCorrect :", allCorrect) 
   if (allCorrect) {
     alert('Congratulations! You have completed the puzzle correctly!\nHints used: ' + hintsUsed);
+	stopTimer(); // Stops timer when the game is complete	  
   } else {
     alert('Some entries are incorrect. Incorrect numbers are highlighted in red.');
   }
