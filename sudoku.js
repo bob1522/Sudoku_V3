@@ -548,7 +548,9 @@ function isPuzzleComplete() {
       return false;
     }
   }
+  stopTimer(); // Stops timer when the game is complete	
   return true;
+	
 }
 
 // Function to check if the puzzle is complete
